@@ -4,7 +4,6 @@ import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -20,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.technosale.audio_record.Adapter.DeviceListAdapter;
 import com.technosale.audio_record.Connection.API;
 import com.technosale.audio_record.Model.AudioModel;
 import com.technosale.audio_record.Model.DeviceModel;
@@ -40,35 +38,29 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView startTV, stopTV, statusTV;
+    private TextView tvStart, tvStop, tvStatus;
     private MediaRecorder mRecorder;
     public static final int REQUEST_AUDIO_PERMISSION_CODE = 1;
     private static String mFileName;
     private String _audioBase64;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        statusTV = findViewById(R.id.idTVstatus);
-        startTV = findViewById(R.id.btnRecord);
-        stopTV = findViewById(R.id.btnStop);
+        tvStatus = findViewById(R.id.idTVstatus);
+        tvStart = findViewById(R.id.btnRecord);
+        tvStop = findViewById(R.id.btnStop);
 
-        // receive bundle from adapter
-
-        // getting bundle from recyclerview adapter
         Bundle bundle = getIntent().getExtras();
-            DeviceModel deviceModel = new DeviceModel();
-            String title = bundle.getString("device_name", deviceModel.device_name);
-            System.out.println("pass gareko bundle ko value" + title);
-
+        DeviceModel deviceModel = new DeviceModel();
+        String title = bundle.getString("device_name", deviceModel.device_name);
         File dir = Environment.getExternalStorageDirectory();
         File target = new File(dir, "capture");
         if (!target.exists())
             target.mkdirs();
 
-        startTV.setOnClickListener(new View.OnClickListener() {
+        tvStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (CheckPermissions()) {
@@ -81,26 +73,25 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         mRecorder.prepare();
                     } catch (IOException e) {
-                        Log.i("TAG", "prepare() failed");
                     }
 
                     mRecorder.start();
 
-                    statusTV.setText("Recording Started");
+                    tvStatus.setText("Recording Started");
                 } else {
                     RequestPermissions();
                 }
             }
         });
-        stopTV.setOnClickListener(new View.OnClickListener() {
+        tvStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mRecorder.stop();
                 mRecorder.release();
                 mRecorder = null;
-                statusTV.setText("Sending audio file...");
+                tvStatus.setText("Sending audio file...");
                 Toast.makeText(getApplicationContext(), "Recording Stopped", Toast.LENGTH_LONG).show();
-                encodeAudio(target,title);
+                encodeAudio(target, title);
             }
         });
     }
@@ -122,16 +113,11 @@ public class MainActivity extends AppCompatActivity {
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    System.out.println("audio value" + audioModel.audio_base64_text);
-                    System.out.println("response code is" + response.code());
-                    System.out.println("response is " + response.body());
                     if (response.code() == 201) {
-                        System.out.println("audio file sent to the" + title);
                         finalUploadFile.delete();
-                        statusTV.setText("Audio sent Successfully");
-                    }
-                    else if (response.code() == 400) {
-                        statusTV.setText("byte limit crossed");
+                        tvStatus.setText("Audio sent Successfully");
+                    } else if (response.code() == 400) {
+                        tvStatus.setText("byte limit crossed");
                         JSONObject error1 = null;
                         try {
                             error1 = new JSONObject(response.errorBody().string());
@@ -148,13 +134,12 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     } else {
-                        statusTV.setText("Could not send the audio");
+                        tvStatus.setText("Could not send the audio");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.d("message", "onFailure: " + t);
                 }
             });
         }
@@ -188,8 +173,7 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{RECORD_AUDIO, WRITE_EXTERNAL_STORAGE}, REQUEST_AUDIO_PERMISSION_CODE);
     }
 
-
-    private void encodeAudio(File target,String title) {
+    private void encodeAudio(File target, String title) {
         byte[] audioBytes;
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -199,11 +183,9 @@ public class MainActivity extends AppCompatActivity {
             while (-1 != (n = fis.read(buf)))
                 baos.write(buf, 0, n);
             audioBytes = baos.toByteArray();
-
-            // Here goes the Base64 string
             _audioBase64 = Base64.encodeToString(audioBytes, Base64.DEFAULT);
             sendFilesToServer(target,
-                    _audioBase64,title);
+                    _audioBase64, title);
         } catch (Exception e) {
 
         }

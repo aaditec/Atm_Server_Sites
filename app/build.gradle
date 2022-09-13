@@ -48,4 +48,6 @@ dependencies {
 
     //picasso for load image
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'javax.json:javax.json-api:1.0'
 }

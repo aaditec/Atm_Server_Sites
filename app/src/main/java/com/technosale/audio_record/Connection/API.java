@@ -1,8 +1,10 @@
 package com.technosale.audio_record.Connection;
 
 import static com.technosale.audio_record.Constants.BASE_URL;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -22,6 +24,6 @@ public class API {
                     .build();
         }
         ApiService api = retrofit.create(ApiService.class);
-        return api; // return the APIInterface object
+        return api;
     }
 }

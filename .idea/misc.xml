@@ -9,11 +9,15 @@
         <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/activity_add_devices.xml" value="0.264" />
         <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/activity_approval.xml" value="0.15693430656934307" />
         <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/activity_dashboard.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/activity_log_file.xml" value="0.1" />
         <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/activity_main.xml" value="0.24814814814814815" />
         <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/approval_list.xml" value="0.24814814814814815" />
         <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/device_list.xml" value="0.2" />
         <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/dialog_new_device_reg.xml" value="0.12864583333333332" />
-        <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/loglist.xml" value="0.175" />
+        <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/log.xml" value="0.20989583333333334" />
+        <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/loglist.xml" value="0.12727272727272726" />
+        <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/nested_item_log.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Siddhartha/AndroidStudioProjects/audio_record/app/src/main/res/layout/recyclerview.xml" value="0.14479166666666668" />
       </map>
     </option>
   </component>

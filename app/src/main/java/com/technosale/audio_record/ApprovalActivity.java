@@ -24,17 +24,12 @@ public class ApprovalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approval);
         Context context = this;
-
+        RecyclerView rvMain = (RecyclerView) findViewById(R.id.rvmain);
 
         ArrayList<DeviceModel> pendingList = (ArrayList<DeviceModel>) getIntent().getSerializableExtra("pendingList");
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvmain);
         approved_adapter adapter = new approved_adapter(pendingList, context);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-        recyclerView.refreshDrawableState();
-
-
+        rvMain.setLayoutManager(new LinearLayoutManager(this));
+        rvMain.setAdapter(adapter);
+        rvMain.refreshDrawableState();
     }
-
-
 }

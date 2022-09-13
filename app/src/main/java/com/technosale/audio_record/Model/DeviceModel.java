@@ -1,5 +1,6 @@
 package com.technosale.audio_record.Model;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class DeviceModel implements Serializable {
     public Integer id;

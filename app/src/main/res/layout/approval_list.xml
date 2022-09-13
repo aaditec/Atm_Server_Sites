@@ -42,7 +42,7 @@
         tools:text="Device Name" />
         </LinearLayout>
     <Button
-        android:id="@+id/approveBtn"
+        android:id="@+id/BtnApprove"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginStart="200dp"

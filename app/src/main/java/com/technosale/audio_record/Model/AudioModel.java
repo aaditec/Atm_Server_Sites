@@ -5,5 +5,4 @@ public class AudioModel {
     public String audio_base64;
     public Boolean is_sent;
     public String audio_base64_text;
-
 }
